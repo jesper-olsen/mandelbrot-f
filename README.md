@@ -2,7 +2,11 @@
 mandelbrot-f
 ==============
 
-Mandelbrot in Fortran
+Mandelbrot in Fortran. Other languages: 
+
+* [Rust](https://github.com/jesper-olsen/mandelbrot-rs) 
+* [Erlang](https://github.com/jesper-olsen/mandelbrot_erl) 
+* [Python](https://github.com/jesper-olsen/mandelbrot-py) 
 
 Build
 -----
@@ -11,11 +15,9 @@ Build
 
 Run
 ---
-    $ fpm run
+    $ time fpm run --profile release
 
 ```
-% time fpm run
-Project is up to date
 Mandelbrot 1000 x 750
                                                                    
                                                      .             
@@ -56,9 +58,9 @@ Mandelbrot 1000 x 750
                 .aMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
              _._MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
-real	0m0.620s
-user	0m0.467s
-sys	0m0.038s
+real	0m0.287s
+user	0m0.225s
+sys	0m0.033s
 
 ```
 

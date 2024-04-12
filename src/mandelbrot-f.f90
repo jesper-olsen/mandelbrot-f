@@ -11,6 +11,8 @@ contains
     complex :: ur = (-1.0,0.35)
     integer, parameter :: width = 1000
     integer, parameter :: height = 750
+    !integer, parameter :: width = 5000
+    !integer, parameter :: height = 5000
     integer :: stepx
     integer :: stepy
     integer :: pixels(width, height)
@@ -21,11 +23,12 @@ contains
     write(*, '(A, I0, A, I0, A)') "Mandelbrot ", width, " x ", height
     call mandelbrot(ll,ur,pixels,width,height)
     !print *, pixels
+    !print ascii image
     do y = 1, height,stepx
         do x = 1, width,stepy
             write(*, '(A)', advance='no') cnt2char(pixels(x, y))
         end do
-        print *   ! Print a newline after each row
+        print *   
     end do
   end subroutine say_hello
 
@@ -43,7 +46,7 @@ contains
 
 
   subroutine mandelbrot(ll, ur, pixels, width, height)
-      integer, intent(out) :: pixels(:,:)   ! 2D array to store the Mandelbrot image
+      integer, intent(out) :: pixels(:,:)  ! image
       integer, intent(in)  :: width        ! pixels
       integer, intent(in)  :: height       ! pixels
       complex, intent(in)  :: ll           ! lower left
@@ -70,7 +73,6 @@ contains
     complex :: z
     z=c
     do escape_time=0,255
-!       if (abs(z)**2>4.0) then
         if (real(z)**2+imag(z)**2>4.0) then
             exit
         end if
