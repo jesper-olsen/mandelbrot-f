@@ -35,10 +35,8 @@ contains
   pure function cnt2char(N) result(Char)
       integer, intent(in) :: N
       character(len=1) :: Char
-      character(len=8) :: symbols
+      character(len=8), parameter :: symbols = "MW2a_. "
       integer :: Idx
- 
-      symbols = "MW2a_. "
  
       Idx = int(real(N) / 255.0 * (len(symbols) - 1)) + 1
       Char = symbols(Idx:Idx)
