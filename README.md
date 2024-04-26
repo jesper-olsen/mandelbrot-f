@@ -61,7 +61,7 @@ Mandelbrot 1000 x 750
 real	0m0.287s
 user	0m0.225s
 sys	0m0.033s
-
+```
 
 ```
 Run
