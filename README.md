@@ -70,7 +70,8 @@ Run
     $ gnuplot topng.gp 
 
 ```
-![PNG](https://raw.githubusercontent.com/jesper-olsen/mandelbrot-f/master/mandelbrot.png) 
+
+![PNG](https://raw.githubusercontent.com/jesper-olsen/mandelbrot-f/main/mandelbrot.png)
 
 
 
