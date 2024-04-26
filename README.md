@@ -15,7 +15,7 @@ Build
 
 Run
 ---
-    $ time fpm run --profile release
+    $ time fpm run --profile release -- --ascii
 
 ```
 Mandelbrot 1000 x 750
@@ -62,6 +62,16 @@ real	0m0.287s
 user	0m0.225s
 sys	0m0.033s
 
+
 ```
+Run
+---
+    $ fpm run --profile release >image.txt
+    $ gnuplot topng.gp 
+
+```
+![PNG](https://raw.githubusercontent.com/jesper-olsen/mandelbrot-f/master/mandelbrot.png) 
+
+
 
 
