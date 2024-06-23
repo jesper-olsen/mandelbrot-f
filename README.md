@@ -7,6 +7,9 @@ Mandelbrot in Fortran. Other languages:
 * [Rust](https://github.com/jesper-olsen/mandelbrot-rs) 
 * [Erlang](https://github.com/jesper-olsen/mandelbrot_erl) 
 * [Python](https://github.com/jesper-olsen/mandelbrot-py) 
+* [Mojo](https://github.com/jesper-olsen/mandelbrot-mojo) 
+
+
 
 Build
 -----
