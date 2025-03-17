@@ -9,6 +9,7 @@ Mandelbrot in Fortran. Other languages:
 * [Python](https://github.com/jesper-olsen/mandelbrot-py) 
 * [Mojo](https://github.com/jesper-olsen/mandelbrot-mojo) 
 * [Nushell](https://github.com/jesper-olsen/mandelbrot-nu/tree/main)
+* [Awk](https://github.com/jesper-olsen/mandelbrot-awk)
 
 
 
