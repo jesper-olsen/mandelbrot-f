@@ -9,10 +9,10 @@ contains
    subroutine say_hello
       complex :: ll = (-1.2, 0.20)
       complex :: ur = (-1.0, 0.35)
-      integer, parameter :: width = 1000
-      integer, parameter :: height = 750
-      !integer, parameter :: width = 5000
-      !integer, parameter :: height = 5000
+      !integer, parameter :: width = 1000
+      !integer, parameter :: height = 750
+      integer, parameter :: width = 5000
+      integer, parameter :: height = 5000
       integer :: pixels(width, height)
 
       logical :: output_ascii = .false.
