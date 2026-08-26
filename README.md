@@ -29,67 +29,103 @@ Single Thread/Multi-thread shows the number of seconds it takes to do a 5000x500
 | Zig         | [mandelbrot-zig](https://github.com/jesper-olsen/mandelbrot-zig)     |             4.9 |          0.9 |  0.7 |               0.3   |
 
 
+## Prerequisites
+
+You will need the following installed:
+
+1.  The fortran compiler (brew install gfortran)
+2.  The fortran package manager (brew install fpm)
+3.  **Gnuplot** (required *only* for generating PNG images).
+
+
 ### Build
 -----
 
     $ fpm build
 
-### Run
+
+### Options
+
 ---
-    $ time fpm run --profile release -- --ascii
+
+Dimensions and view are configurable via `key=value` arguments:
 
 ```
-Mandelbrot 1000 x 750
-                                                                   
-                                                     .             
-                                                    .              
-                                                                   
-                                                                   
-                                                     .             
-                                                       .   . .     
-                                                               ..  
-                                                               .   
-  .                                                           .. . 
- ..                                                            .M. 
-    ..        ...             .                             . . . .
-   ._M.                                                           _
-   ..   ..    .                                                    
-         . . .                                                     
- .           _ .          .                          .         ..a.
-             ._.  .                       .                 ...  ._
-           .  a.. _..     .                           . ........Ma_
-            ..._.._       ._..           .                . ._a_MMM
-           ..._MMM._ ..   ._             .     .             .MMMMM
-       . ._.._MMMMM..._......   .           ...   _        .__MMMMM
-             .aMMMaMMMM2_MM.a  _             .._.        .._2MMMMMM
-             ..aMMMMMMMMMMM....             ___2.._         ._MMMMM
-         .....MMMMMMMMMMMMMM.._.             .M22._   Ma .  ._MMMMM
-     ..    .MMMMMMMMMMMMMMMMMM2      .      ._MMMa.  ._a._M....2MMM
-      __ ...MMMMMMMMMMMMMMMMM_..       ...  ._MMMM_.M.MM__MMMMMMMMM
-     . ._.aMMMMMMMMMMMMMMMMMMMM.      .MM..2a_MMMMMMMMMMMMMMMMMMMMM
- _ ..   ._MMMMMMMMMMMMMMMMMMMMM_   ..M MMM.MMMMMMMMMMMMMMMMMMMMMMMM
-.        _._MMMMMMMMMMMMMMMMMMa. . a_W..MMMMMMMMMMMMMMMMMMMMMMMMMMM
-          .2MMMMMMMMMMMMMMMMMMM...aM_MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-        ._.2WMMMMMMMMMMMMMMMMa..2MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-        ...WMMMMMMMMMMMMMMMMM.MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-        .   .2MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-      .     .MW_MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-              _a2_WMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                .2...MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-                .aMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-             _._MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-
-real	0m0.287s
-user	0m0.225s
-sys	0m0.033s
+width=<n>         Image width in pixels (default: 100)
+height=<n>        Image height in pixels (default: 75)
+ll_x=<x>          Lower-left real part (default: -1.2)
+ll_y=<y>          Lower-left imaginary part (default: 0.20)
+ur_x=<x>          Upper-right real part (default: -1.0)
+ur_y=<y>          Upper-right imaginary part (default: 0.35)
+max_iter=<n>      Maximum escape-time iterations (default: 255)
+-a, --ascii       Generate ASCII art instead of gnuplot data
 ```
 
-```
-Run
----
-    $ fpm run --profile release >image.txt
-    $ gnuplot topng.gp 
+For example, to zoom in on a different area at a custom resolution:
 
+```
+$ fpm run --profile release -- width=1200 height=900 ll_x=-0.75 ll_y=0.1 ur_x=-0.74 ur_y=0.11 -a
+```
+
+### Example run - ascii output
+
+```sh
+time fpm run --profile release -- --ascii
+
+Project is up to date
+Mandelbrot 100 x 75
+
+
+
+                                                                              .
+                                                                              .
+                                                                                    . .....
+                                                                                  .       . . _
+.
+                        .
+ .                      .                                                                     .M.
+                       . .                                                                   ... .
+    .MM.             .                  .                                                        ._.
+     ..   .  .     _..
+   .        ...    .
+            .    ..   .    .                                                                    . a.
+                  ....     .            .                                              ..  _    ..__
+                  .... .  .  .       ....     .                .               ..     .  a__......_M
+                   ..........        .. .   .                ..                  .    ....__._.M_WMM
+              ..  ...MM2a__..  .     ..._ . .                                         .  W.2MMMMMMMM
+                _aa_aMMMMMM.._ ._. ...__.                     . . .                      __aMMMMMMMM
+           .  _   ..MMMMMMM...M_M_W_.M_M..    .                   a..._  .          _  ..W_MMMMMMMMM
+                ...a_MMMMMMMMMMMMMMMaMMM_.  ...                    .._a_.__   .          _.MMMMMMMMM
+   .        .   _..._WMMMMMMMMMMMMMMMMMa.......               _ _.a.._a..      ..       ..._MMMMMMMM
+       . _    ...__aMMMMMMMMMMMMMMMMMMMMM__.__         .           .aMMMaMM. W.M2M_. W.  ...aMMMMMMM
+         ..    .._2MMMMMMMMMMMMMMMMMMMMMMMMa..          .  .    .Ma_WMMMMM2.a..MMMM.._M.2M.a.._MMMMM
+     . ._.....M..2MMMMMMMMMMMMMMMMMMMMMMMMMM...         .._aW2_  ..2MMMMMMM..MWMMMMMMMMMMMMMMMMMMMMM
+   . ..   ..aaMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM_. .   .    .a.MMM..2M.a.MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+.   .      .._aMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM.      .2_M.._MMM_MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+     .   .   ...aMMMMMMMMMMMMMMMMMMMMMMMMMMMM_   .aW.MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+           .  ...MMMMMMMMMMMMMMMMMMMMMMMMMMM....M_MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+            .a..WMMMMMMMMMMMMMMMMMMMMMMMMMWM.MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+          . _ ._.._MMMMMMMMMMMMMMMMMMMMMMM_MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+       .. .     2_.aMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                a_ .2MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+              _.    .a._._a_MM___MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                        ..._.aMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                      M_MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+           _   M   _a..MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+0.04s user 0.10s system 65% cpu 0.216 total
+```
+
+### Example run - 5000x5000 mandelbrot, gnuplot data output
+
+```sh
+time fpm run --profile release -- width=5000 height=5000 >image.txt
+
+Project is up to date
+4.37s user 0.10s system 98% cpu 4.521 tota
+```
+
+```sh
+gnuplot topng.gp
 ```
 
 ![PNG](https://raw.githubusercontent.com/jesper-olsen/mandelbrot-f/main/mandelbrot.png)
